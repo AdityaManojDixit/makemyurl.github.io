@@ -5,6 +5,7 @@ import {shortner} from './src/models/shortUrl.mjs';
 const app = express();
 const port = process.env.PORT || 5000;
 
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
@@ -17,6 +18,7 @@ app.post('/shortUrls', async (req, res) => {
     await shortner.create({
         full: req.body.fullUrl,
     });
+    
     res.redirect('/');
 });
 

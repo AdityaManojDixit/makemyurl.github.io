@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URL Shortner</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -16,14 +16,21 @@
 
     <div class="container">
         <h1>Url Shortner</h1>
-            <form action="/shortUrls" method="POST" class="my-4 form-inline">
+            <form action="/shortUrls" method="POST" class="my-4 form-inline" id="myForm">
                 <label for="fullUrl" class="sr-only">Enter URL: </label>
 
-                <input required placeholder="URL" type="url" name="fullUrl" id="fullUrl"    class="form-control col mr-2">
-                <button class="btn btn-success my-1" type="submit">Shorten</button>
+                <input required placeholder="URL" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
+            <button class="btn btn-success my-1" type="submit">Shorten</button>
+                <button class="btn btn-warning my-1" onclick="myFunction()">History</button>
             </form>
-
-            <table class="table table-striped table-responsive">
+            <p>
+                Steps:
+                <br> 
+                    1) Enter your URL & click 'Shorten'.
+                <br>
+                    2) Click 'History' & check for your shortened url at top.
+            </p>
+            <table class="table table-striped table-responsive" id="table" style="display: none;">
                 <thead>
                     <tr>
                         <th>Full URL</th>
@@ -33,9 +40,25 @@
                 </thead>
                 <tbody id="tbdy"> </tbody>
             </table>
+
+            
     </div>
+    
 </body>
+
+</script>
+
 <script>
+
+    function myFunction(){
+        var add = document.getElementById('table');
+        if(add.style.display == 'none'){
+            add.style.display = 'block';
+        }else {
+            add.style.display = 'none';
+        }
+    }
+
     const miniURLs = <%- JSON.stringify(miniURL) %>;
     const bodi = document.getElementById('tbdy');
     miniURLs.forEach(miniURL => {
@@ -47,7 +70,7 @@
             <td>${miniURL.clicks}</td>
         `;
         
-        bodi.appendChild(row);
+        bodi.prepend(row);
     });
 </script>
 

@@ -1,5 +1,8 @@
 import { mongoose } from "mongoose";
-mongoose.connect("mongodb://127.0.0.1:27017/urlshortner")
+
+const URI = "mongodb+srv://AdityaDixit:SlveUMFEALfdC2Av@cluster0.v5dgwa9.mongodb.net/urlshortner?retryWrites=true&w=majority"
+
+mongoose.connect(URI)
 .then(()=>{
     console.log('Connection Established!')
 }).catch((error)=>{
